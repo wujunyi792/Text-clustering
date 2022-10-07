@@ -1,0 +1,11 @@
+badWords: ['杭州电子科技大学', '2022年', '2021年', '竞赛', '大赛', "成功参赛奖", "三等奖", "二等奖", "一等奖" ,"奖"]
+reBadWords: [ {
+  start: '第',
+  end: '届',
+  maxLength: 4
+},{
+  start: 'test',
+  end: 're',
+  maxLength: 3
+} ]
+legitimateMatchingRate: 0.4
