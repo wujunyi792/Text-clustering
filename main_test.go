@@ -1,4 +1,4 @@
-package Text_clustering
+package clustering
 
 import "testing"
 

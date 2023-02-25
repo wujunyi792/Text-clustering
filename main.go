@@ -1,37 +1,34 @@
-package Text_clustering
+package clustering
 
 import (
-	"github.com/Lost-little-dinosaur/Text-clustering/config"
-	"github.com/Lost-little-dinosaur/Text-clustering/myDiff"
+	"clustering/config"
+	"clustering/myDiff"
 	"regexp"
 	"strconv"
 	"strings"
 )
 
-//	testStrArr := []string{"2022年长三角数学建模竞赛", "浙江省第十九届大学生程序设计竞赛", "大创省级立项", "浙江省计算机设计大赛省一", "2022年第二届长三角数学建模竞赛一等奖", "第二届长三角高校数学建模竞赛 SPSSPRO创新应用奖", "浙江省spsspro创新应用奖", "长三角数学建模竞赛二等奖", "杭电第23届数学建模竞赛", "大学生创业竞赛 省级立项", "浙江省大学生物理（理论）创新竞赛", "第二届长三角高校数学建模竞赛", "第十三届中国大学生服务外包创新创业企业命题类（A类）", "认证杯数学建模竞赛", "高教社杯数学建模竞赛", "2022长三角数学建模竞赛三等奖", "2022年第二届长三角高校数学建模竞赛", "互联网➕", "长三角数学建模", "长三角数学建模竞赛", "2022蓝桥杯浙江省一等奖", "浙江省计算机设计大赛一等奖", "浙江省计算机设计大赛省一", "第十二届浙江省大学生物理实验与科技创新竞赛", "服务外包大赛区域赛三等奖", "长三角数模竞赛", "长三角数学建模竞赛", "全国大学生数学竞赛", "浙江省计算机设计大赛", "2022年浙江省第十九届大学生程序设计竞赛", "第二届长三角高校数学建模竞赛\t"}
-
 func TextArrClustering(testStrArr []string) {
 
 	clusteringConfig := config.ClusteringConfig{}
 	clusteringConfig.GetConf()
-	transFromedArr := [][]string{}
+	transformedArr := [][]string{}
 	for _, str := range testStrArr {
-		transFromedArr = append(transFromedArr, []string{str})
+		transformedArr = append(transformedArr, []string{str})
 	}
 
-	//fmt.Println(transFromedArr)
 	quitFlag := true
 	for quitFlag {
 		quitFlag = false
 		i := 0
-		for i < len(transFromedArr) {
+		for i < len(transformedArr) {
 			j := 0
-			for j < len(transFromedArr) {
+			for j < len(transformedArr) {
 				if i != j {
-					if len(transFromedArr[j]) == 1 && myCompare(transFromedArr[i], transFromedArr[j][0], clusteringConfig) > clusteringConfig.LegitimateMatchingRate {
-						transFromedArr[i] = append(transFromedArr[i], transFromedArr[j][0])
-						//删除transFromedArr[j]
-						transFromedArr = append(transFromedArr[:j], transFromedArr[j+1:]...)
+					if len(transformedArr[j]) == 1 && myCompare(transformedArr[i], transformedArr[j][0], clusteringConfig) > clusteringConfig.LegitimateMatchingRate {
+						transformedArr[i] = append(transformedArr[i], transformedArr[j][0])
+						//transformedArr[j]
+						transformedArr = append(transformedArr[:j], transformedArr[j+1:]...)
 						quitFlag = true
 					}
 				}
@@ -47,7 +44,7 @@ func TextArrClustering(testStrArr []string) {
 	//fmt.Println("从", len(testStrArr), "个缩减到了", len(transFromedArr), "个")
 }
 
-//比较两个字符串数组
+// 比较两个字符串数组
 func myCompare(strArr1 []string, str2 string, clusteringConfig config.ClusteringConfig) float64 {
 	var tempStrArr1 []string
 	tempStr2 := str2

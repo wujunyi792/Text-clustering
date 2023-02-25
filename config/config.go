@@ -3,10 +3,10 @@ package config
 import (
 	"fmt"
 	yaml "gopkg.in/yaml.v2"
-	"io/ioutil"
+	"os"
 )
 
-//解析yml文件
+// 解析yml文件
 type ClusteringConfig struct {
 	BadWords               []string   `yaml:"badWords"`
 	ReBadWords             []Restruct `yaml:"reBadWords"`
@@ -20,7 +20,7 @@ type Restruct struct {
 }
 
 func (c *ClusteringConfig) GetConf() *ClusteringConfig {
-	yamlFile, err := ioutil.ReadFile("config/config.yaml")
+	yamlFile, err := os.ReadFile("config/config.yaml")
 	if err != nil {
 		fmt.Println(err.Error())
 	}
